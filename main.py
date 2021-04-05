@@ -11,7 +11,7 @@ class DPlane(QMainWindow, Ui_MainWindow):
         super(DPlane, self).__init__()
         self.setupUi(self)
 
-    def closeEvent(self, a0: QtGui.QCloseEvent):
+    def closeEvent(self, event):
         reply = QMessageBox.question(
             self,
             'Message',
@@ -22,6 +22,8 @@ class DPlane(QMainWindow, Ui_MainWindow):
 
         if reply == QMessageBox.Yes:
             self.close()
+        else:
+            event.ignore()
 
 
 def main():
