@@ -27,6 +27,10 @@ class DPlane(QMainWindow, Ui_MainWindow):
         """ Виджет просмотра заявок, распечатки и экспорта в .csv/.xml.  """
         self.view_apps_form = None
 
+        # print(*self.__dict__, sep='\n')
+        # print('*' * 30)
+        # print(*self.add_apps_form.__dict__.items(), sep='\n')
+
         """ Добавление виджетов в список. """
         self.widget_list.append(self.add_apps_form)
         self.widget_list.append(self.edit_apps_form)
@@ -79,6 +83,7 @@ class AddAppsForm(QtWidgets.QWidget, Ui_AddAppsForm):
         self.add_button.clicked.connect(self.add_application)
         self.save_button.clicked.connect(self.save_apps)
         self.cancel_button.clicked.connect(self.hide_widget)
+        self.clear_button.clicked.connect(self.clear_table)
         # self.add_apps_form.add_project_btn.clicked.connect()
         # self.add_apps_form.add_workpack_btn.clicked.connect()
         # self.add_apps_form.add_service_btn.clicked.connect()
@@ -123,23 +128,26 @@ class AddAppsForm(QtWidgets.QWidget, Ui_AddAppsForm):
 
     def add_application(self):
         """ Добавление заявки в список перед сохранением. """
-        num_row = self.apps_table_widget.rowCount()
-        num_cols = self.apps_table_widget.columnCount()
-
-        if num_row == 0:
-            self.apps_table_widget.setRowCount(1)
-        else:
-            self.apps_table_widget.insertRow(num_row)
-
-        num_row = self.apps_table_widget.rowCount()
-
+        self.add_row()
         self.get_items()
+        self.add_items()
+        self.apps_items = []
+
+    def add_items(self):
+        num_cols = self.apps_table_widget.columnCount()
+        num_row = self.apps_table_widget.rowCount()
 
         for i in range(num_cols):
             cell_info = QtWidgets.QTableWidgetItem(str(self.apps_items[i]))
             self.apps_table_widget.setItem(num_row - 1, i, cell_info)
 
-        self.apps_items = []
+    def add_row(self):
+        num_row = self.apps_table_widget.rowCount()
+
+        if num_row:
+            self.apps_table_widget.insertRow(num_row)
+        else:
+            self.apps_table_widget.setRowCount(1)
 
     def clear_table(self):
         """ Очистка QTableWidget от таблицы. """
