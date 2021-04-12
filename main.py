@@ -91,6 +91,11 @@ class AddAppsForm(QtWidgets.QWidget, Ui_AddAppsForm):
         # self.add_apps_form.add_type_btn.clicked.connect()
         # self.add_apps_form.add_builder_btn.clicked.connect()
 
+        """ Кнопка удлаения заявки. """
+        self.del_application = None
+        # self.del_application.setText('Удалить')
+        # self.del_application.clicked.connect(self.delete_row)
+
         """ Инициализация всех QComboBox в виджете добавления заявок. """
 
         self.project_cbox.addItems([
@@ -107,15 +112,17 @@ class AddAppsForm(QtWidgets.QWidget, Ui_AddAppsForm):
         self.builder_cbox.addItems(['ОРВС', 'ДСУ-2', 'ЮУС'])
 
         """ Создание таблицы в QTableWidget. """
-        self.apps_table_widget.setColumnCount(9)
+        self.apps_table_widget.setColumnCount(10)
         self.apps_table_widget.setHorizontalHeaderLabels([
-            'Начало', 'Конец', 'Объект', 'Договор', 'Пакет  работ', 'Вид техники', 'Вид услуги', 'Подрядчик', 'Отв.'
+            '', 'Начало', 'Конец', 'Объект',
+            'Договор', 'Пакет  работ', 'Вид техники',
+            'Вид услуги', 'Подрядчик', 'Отв.'
         ])
 
         """ Список содержащий выбор пользователя во всех QComboBox. """
         self.apps_items = []
 
-    def get_items(self):
+    def get_items(self, clear_=False):
         self.apps_items.append(self.dateTimeEdit_1.date())
         self.apps_items.append(self.dateTimeEdit_2.date())
         self.apps_items.append(self.project_cbox.currentText())
@@ -131,14 +138,23 @@ class AddAppsForm(QtWidgets.QWidget, Ui_AddAppsForm):
         self.add_row()
         self.get_items()
         self.add_items()
-        self.apps_items = []
+        self.apps_items.clear()
 
     def add_items(self):
+        """ Наполнение строки таблицы содержимым всех QComboBox. """
         num_cols = self.apps_table_widget.columnCount()
         num_row = self.apps_table_widget.rowCount()
 
-        for i in range(num_cols):
-            cell_info = QtWidgets.QTableWidgetItem(str(self.apps_items[i]))
+        """ Добавление кнопки УДОЛИ в 0-ю ячейки строки. """
+        self.del_application = QtWidgets.QPushButton()
+        self.del_application.setText('Удалить')
+        self.apps_table_widget.setCellWidget(num_row - 1, 0, self.del_application)
+
+        for i in range(1, num_cols):
+            cell_info = QtWidgets.QTableWidgetItem(str(self.apps_items[i - 1]))
+            cell_info.setFlags(
+                QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled
+            )
             self.apps_table_widget.setItem(num_row - 1, i, cell_info)
 
     def add_row(self):
@@ -149,6 +165,9 @@ class AddAppsForm(QtWidgets.QWidget, Ui_AddAppsForm):
         else:
             self.apps_table_widget.setRowCount(1)
 
+    def delete_row(self):
+        print('11')
+
     def clear_table(self):
         """ Очистка QTableWidget от таблицы. """
         for i in range(self.apps_table_widget.rowCount() - 1, -1, -1):
@@ -158,13 +177,13 @@ class AddAppsForm(QtWidgets.QWidget, Ui_AddAppsForm):
         """ Добавления списка заявок в БД и скрытие виджета. """
         self.clear_table()
         self.setParent(None)
-        self.apps_items = []
+        self.apps_items.clear()
 
     def hide_widget(self):
         """ Скрытие виджета добавления заявок. """
         self.clear_table()
         self.setParent(None)
-        self.apps_items = []
+        self.apps_items.clear()
 
 
 class EditAppsForm(QtWidgets.QWidget, Ui_Form):
