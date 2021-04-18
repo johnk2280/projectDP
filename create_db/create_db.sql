@@ -6,7 +6,7 @@ CREATE TABLE ogranizations(
 	title VARCHAR(255) NOT NULL,
 	inn INTEGER,
 	created_at INTEGER,
-	udated_at INTEGER
+	updated_at INTEGER
 );
 
 
@@ -41,7 +41,8 @@ CREATE TABLE projects(
 DROP TABLE IF EXISTS workpacks;
 CREATE TABLE workpacks(
 	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	title VARCHAR(255) NOT NULL
+	title VARCHAR(255) NOT NULL,
+	created_at INTEGER
 );
 
 
@@ -49,13 +50,16 @@ DROP TABLE IF EXISTS contracts;
 CREATE TABLE contracts(
 	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	title VARCHAR(255) NOT NULL,
+	project_id INTEGER NOT NULL, 
 	organization_id INTEGER NOT NULL,
-	contractors_id INTEGER NOT NULL,
+	contractor_id INTEGER NOT NULL,
 	from_date INTEGER NOT NULL,
 	created_at INTEGER,
 	FOREIGN KEY (organization_id) REFERENCES ogranizations(id) ON UPDATE NO ACTION ON DELETE NO ACTION,
-	FOREIGN KEY (contractors_id) REFERENCES contractors(id) ON UPDATE NO ACTION ON DELETE NO ACTION
+	FOREIGN KEY (contractor_id) REFERENCES contractors(id) ON UPDATE NO ACTION ON DELETE NO ACTION,
+	FOREIGN KEY (project_id) REFERENCES projects(id) ON UPDATE NO ACTION ON DELETE NO ACTION
 );
+
 
 DROP TABLE IF EXISTS specs;
 CREATE TABLE specs(
