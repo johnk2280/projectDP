@@ -5,8 +5,8 @@ from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMessageBox
 
-from pd_main_window import Ui_MainWindow
-from gui.add_apps_widget import Ui_AddAppsForm
+from gui.pd_main_window import Ui_MainWindow
+from gui.add_apps_widget_v_1_0 import Ui_AddAppsForm
 from gui.edit_apps_widget import Ui_Form
 
 
