@@ -109,15 +109,17 @@ class AddAppsForm(QtWidgets.QWidget, Ui_AddAppsForm):
         ])
         self.builder_cbox.addItems(['ОРВС', 'ДСУ-2', 'ЮУС'])
 
-        self.create_table(10)
+        self.create_table()
 
-    def create_table(self, num_cols):
+    def create_table(self):
         """ Создание таблицы в QTableWidget. """
-        self.apps_table_widget.setColumnCount(num_cols)
 
         for obj in self.project_frame.children():
             if isinstance(obj, QtWidgets.QLabel):
                 self.header_labels.append(obj.text())
+
+        num_cols = len(self.header_labels)
+        self.apps_table_widget.setColumnCount(num_cols)
 
         self.apps_table_widget.setHorizontalHeaderLabels(self.header_labels)
         self.apps_table_widget.horizontalHeader().setSectionResizeMode(0, 2)
@@ -132,8 +134,9 @@ class AddAppsForm(QtWidgets.QWidget, Ui_AddAppsForm):
         Функция наполняет список значениями
         из QDateTimeEdit, QComboBox, QLineEdit.
         """
-        self.apps_items.append(self.dateTimeEdit_1.dateTime().toPyDateTime())
-        self.apps_items.append(self.dateTimeEdit_2.dateTime().toPyDateTime())
+
+        self.apps_items.append(self.dateTimeEdit_1)
+        self.apps_items.append(self.dateTimeEdit_2)
 
         for obj in self.project_frame.children():
             if isinstance(obj, QtWidgets.QComboBox):
@@ -160,7 +163,11 @@ class AddAppsForm(QtWidgets.QWidget, Ui_AddAppsForm):
         self.del_app.clicked.connect(self.delete_row)
 
         for i in range(1, num_cols):
-            cell_info = QtWidgets.QTableWidgetItem(str(self.apps_items[i - 1]))
+            if isinstance(self.apps_items[i - 1], QtWidgets.QDateTimeEdit):
+                cell_info = QtWidgets.QTableWidgetItem(self.apps_items[i - 1].text())
+            else:
+                cell_info = QtWidgets.QTableWidgetItem(self.apps_items[i - 1])
+
             cell_info.setFlags(
                 QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled
             )
