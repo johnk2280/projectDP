@@ -3,11 +3,13 @@ import sys
 from PyQt5.QtWidgets import QApplication
 
 from app import DPlane
+from database.database import Database
 
 
 def main():
+    orm_database = Database('sqlite:///dp_base.db')
     app = QApplication(sys.argv)
-    plane = DPlane()
+    plane = DPlane(orm_database)
     plane.show()
     sys.exit(app.exec_())
 

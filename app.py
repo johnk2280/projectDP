@@ -9,17 +9,20 @@ from gui.pd_main_window import Ui_MainWindow
 from gui.add_apps_widget_v_1_0 import Ui_AddAppsForm
 from gui.edit_apps_widget import Ui_Form
 
+from database.database import Database
+
 
 class DPlane(QMainWindow, Ui_MainWindow):
-    def __init__(self, parent=None):
+    def __init__(self, db: Database, parent=None):
         super(DPlane, self).__init__(parent)
         self.setupUi(self)
 
+        self.db = db
         """ Список виджетов для динамической смены. """
         self.widget_list = []
 
         """ Виджет добавления заявок. """
-        self.add_apps_form = AddAppsForm()
+        self.add_apps_form = AddAppsForm(self.db)
 
         """ Виджет редактирования заявок. """
         self.edit_apps_form = EditAppsForm()
@@ -72,10 +75,11 @@ class DPlane(QMainWindow, Ui_MainWindow):
 
 class AddAppsForm(QtWidgets.QWidget, Ui_AddAppsForm):
     """ Виджет добавления заявок. """
-    def __init__(self, parent=None):
+    def __init__(self, db: Database, parent=None):
         super(AddAppsForm, self).__init__(parent)
         self.setupUi(self)
 
+        self.db = db
         """ Список содержащий выбор пользователя во всех QComboBox. """
         self.apps_items = []
         self.header_labels = ['', 'Начало', 'Конец']
@@ -194,6 +198,8 @@ class AddAppsForm(QtWidgets.QWidget, Ui_AddAppsForm):
 
     def save_apps(self):
         """ Добавления списка заявок в БД и скрытие виджета. """
+        data = {}
+        self.db.add_app(data)
         self.clear_table()
         self.setParent(None)
         self.apps_items.clear()
