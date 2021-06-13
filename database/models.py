@@ -21,7 +21,7 @@ class Organizations(Base):
     full_name = Column(String, unique=True, nullable=False)
     short_name = Column(String, unique=True, nullable=False)
     inn = Column(Integer, unique=True, nullable=False)
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now(), nullable=False)
 
 
 class Contractors(Base):
@@ -30,7 +30,7 @@ class Contractors(Base):
     full_name = Column(String, unique=True, nullable=False)
     short_name = Column(String, unique=True, nullable=False)
     inn = Column(Integer, unique=True, nullable=False)
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now(), nullable=False)
 
 
 class Builders(Base):
@@ -39,7 +39,7 @@ class Builders(Base):
     full_name = Column(String, unique=True, nullable=False)
     short_name = Column(String, unique=True, nullable=False)
     inn = Column(Integer, unique=True, nullable=False)
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now(), nullable=False)
 
 
 class Projects(Base):
@@ -48,14 +48,14 @@ class Projects(Base):
     title = Column(String, unique=True,  nullable=False)
     organization_id = Column(Integer, ForeignKey('organizations.id'), nullable=False)
     organization = relationship('Organizations', backref='projects')
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now(), nullable=False)
 
 
 class WorkPacks(Base):
     __tablename__ = 'work_packs'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     title = Column(String, unique=True, nullable=False)
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now(), nullable=False)
 
 
 class Contracts(Base):
@@ -69,7 +69,7 @@ class Contracts(Base):
     contractor_id = Column(Integer, ForeignKey('contractors.id'), nullable=False)
     contractor = relationship('Contractors', backref='contracts')
     from_date = Column(DateTime, nullable=False)
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now(), nullable=False)
 
 
 class Specs(Base):
@@ -82,14 +82,14 @@ class Specs(Base):
     work_pack = relationship('WorkPacks', backref='specs')
     from_date = Column(DateTime, nullable=False)
     amount = Column(Float, nullable=False)
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now(), nullable=False)
 
 
 class MechanismTypes(Base):
     __tablename__ = 'mechanism_types'
     id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     title = Column(String, unique=True, nullable=False)
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now(), nullable=False)
 
 
 class Services(Base):
@@ -98,7 +98,7 @@ class Services(Base):
     title = Column(String, unique=True, nullable=False)
     mechanism_type_id = Column(Integer, ForeignKey('mechanism_types.id'), nullable=False)
     mechanism_type = relationship('MechanismTypes')
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now(), nullable=False)
 
 
 class Applications(Base):
@@ -121,7 +121,7 @@ class Applications(Base):
     builder_id = Column(Integer, ForeignKey('builders.id'), nullable=False)
     builder = relationship('Builders', backref='applications')
     responsible = Column(String, nullable=True)
-    is_deleted = Column(Boolean, default=0)
+    is_deleted = Column(Boolean, default=0, nullable=False)
 
     def __init__(self, **kwargs):
         self.from_date = kwargs['from_date']
