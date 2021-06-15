@@ -2,7 +2,7 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 
-from controllers.main_window_app import DPlane
+from controllers.main_window_controller import DPlane
 from database.database import Database
 
 
