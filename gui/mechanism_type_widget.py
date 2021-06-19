@@ -37,7 +37,7 @@ class MechTypeForm(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.mechanism_type_ledit.setFont(font)
-        self.mechanism_type_ledit.setMaxLength(12)
+        # self.mechanism_type_ledit.setMaxLength(12)
         self.mechanism_type_ledit.setObjectName("mechanism_type_ledit")
         self.gridLayout.addWidget(self.mechanism_type_ledit, 0, 1, 1, 1)
         self.mechanism_type_label = QtWidgets.QLabel(self.frame)

@@ -37,7 +37,7 @@ class WorkPackForm(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.work_pack_ledit.setFont(font)
-        self.work_pack_ledit.setMaxLength(12)
+        # self.work_pack_ledit.setMaxLength(12)
         self.work_pack_ledit.setObjectName("work_pack_ledit")
         self.gridLayout.addWidget(self.work_pack_ledit, 0, 1, 1, 1)
         self.work_pack_label = QtWidgets.QLabel(self.frame)

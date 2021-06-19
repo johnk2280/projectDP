@@ -16,9 +16,10 @@ from controllers.add_spec_controller import AddSpecForm
 class AddOrdersForm(WidgetForm, Ui_AddOrdersForm):
     """ Виджет добавления заявок. """
 
-    def __init__(self):
-        super(AddOrdersForm, self).__init__()
+    def __init__(self, parent=None):
+        super(AddOrdersForm, self).__init__(parent)
         self.setupUi(self)
+        self.windowModality()
 
         self.add_contract_form = AddContractForm()
         self.add_firm_form = AddFirmForm()
@@ -37,7 +38,7 @@ class AddOrdersForm(WidgetForm, Ui_AddOrdersForm):
         """ Кнопка удлаения заявки. """
         self.del_app = None
 
-        self.add_button.clicked.connect(self.add_application)
+        self.add_button.clicked.connect(self.add_order)
         self.save_button.clicked.connect(self.save)
         self.cancel_button.clicked.connect(self.hide)
         self.clear_button.clicked.connect(self._clear_table)
@@ -84,7 +85,7 @@ class AddOrdersForm(WidgetForm, Ui_AddOrdersForm):
 
         self.orders_table_widget.horizontalHeader().setSectionResizeMode(num_cols - 1, QtWidgets.QHeaderView.Stretch)
 
-    def _get_items(self, clear_=False):
+    def get_data(self, clear_=False):
         """
         Функция наполняет список значениями
         из QDateTimeEdit, QComboBox, QLineEdit.
@@ -93,16 +94,22 @@ class AddOrdersForm(WidgetForm, Ui_AddOrdersForm):
         self.orders_items.append(self.dateTimeEdit_1)
         self.orders_items.append(self.dateTimeEdit_2)
 
+        # TODO: данная функция должна возвращать список/словарь.
+        #  Проверить нужен ли атрибут orders_items?
+        #  Обработать исключения.
+
         for obj in self.project_frame.children():
-            if isinstance(obj, QtWidgets.QComboBox):
+            if isinstance(obj, QtWidgets.QDateTimeEdit):
+                self.orders_items.append(obj.text())
+            elif isinstance(obj, QtWidgets.QComboBox):
                 self.orders_items.append(obj.currentText())
             elif isinstance(obj, QtWidgets.QLineEdit):
                 self.orders_items.append(obj.text())
 
-    def add_application(self):
+    def add_order(self):
         """ Добавление заявки в список перед сохранением. """
         self._add_row()
-        self._get_items()
+        self.get_data()
         self._add_items()
         self.orders_items.clear()
 

@@ -37,7 +37,7 @@ class ProjectForm(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.project_ledit.setFont(font)
-        self.project_ledit.setMaxLength(12)
+        # self.project_ledit.setMaxLength(12)
         self.project_ledit.setObjectName("project_ledit")
         self.gridLayout.addWidget(self.project_ledit, 1, 1, 1, 1)
         self.organization_label = QtWidgets.QLabel(self.frame)

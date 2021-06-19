@@ -37,7 +37,7 @@ class ServiceForm(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.service_ledit.setFont(font)
-        self.service_ledit.setMaxLength(12)
+        # self.service_ledit.setMaxLength(12)
         self.service_ledit.setObjectName("service_ledit")
         self.gridLayout.addWidget(self.service_ledit, 1, 1, 1, 1)
         self.mechanism_type_label = QtWidgets.QLabel(self.frame)

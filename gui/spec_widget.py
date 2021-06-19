@@ -141,6 +141,7 @@ class SpecForm(object):
         self.from_date_dateEdit.setMinimumSize(QtCore.QSize(110, 23))
         self.from_date_dateEdit.setMaximumSize(QtCore.QSize(110, 23))
         self.from_date_dateEdit.setCalendarPopup(True)
+        self.from_date_dateEdit.setDate(QtCore.QDate.currentDate())
         self.from_date_dateEdit.setObjectName("from_date_dateEdit")
         self.gridLayout.addWidget(self.from_date_dateEdit, 6, 1, 1, 1)
         self.amount_label = QtWidgets.QLabel(self.frame)
