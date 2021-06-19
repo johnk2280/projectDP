@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_ServiceForm(object):
+class ServiceForm(object):
     def setupUi(self, ServiceForm):
         ServiceForm.setObjectName("ServiceForm")
         ServiceForm.resize(603, 198)
@@ -92,7 +92,7 @@ class Ui_ServiceForm(object):
 
     def retranslateUi(self, ServiceForm):
         _translate = QtCore.QCoreApplication.translate
-        ServiceForm.setWindowTitle(_translate("ServiceForm", "Form"))
+        ServiceForm.setWindowTitle(_translate("ServiceForm", "Добавление услуги"))
         self.mechanism_type_label.setText(_translate("ServiceForm", "Тип механизма"))
         self.service_label.setText(_translate("ServiceForm", "Наименование услуги"))
         self.save_button.setText(_translate("ServiceForm", "Записать и закрыть"))

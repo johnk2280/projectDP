@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_ContractForm(object):
+class ContractForm(object):
     def setupUi(self, ContractForm):
         ContractForm.setObjectName("ContractForm")
         ContractForm.resize(603, 250)
@@ -138,7 +138,7 @@ class Ui_ContractForm(object):
 
     def retranslateUi(self, ContractForm):
         _translate = QtCore.QCoreApplication.translate
-        ContractForm.setWindowTitle(_translate("ContractForm", "Form"))
+        ContractForm.setWindowTitle(_translate("ContractForm", "Добавление договора"))
         self.organization_label.setText(_translate("ContractForm", "Застройщик"))
         self.from_date_label.setText(_translate("ContractForm", "От"))
         self.contractor_label.setText(_translate("ContractForm", "Контрагент"))

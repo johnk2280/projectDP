@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_SpecForm(object):
+class SpecForm(object):
     def setupUi(self, SpecForm):
         SpecForm.setObjectName("SpecForm")
         SpecForm.resize(603, 350)
@@ -184,7 +184,7 @@ class Ui_SpecForm(object):
 
     def retranslateUi(self, SpecForm):
         _translate = QtCore.QCoreApplication.translate
-        SpecForm.setWindowTitle(_translate("SpecForm", "Form"))
+        SpecForm.setWindowTitle(_translate("SpecForm", "Добавление спецификации"))
         self.organization_label.setText(_translate("SpecForm", "Застройщик"))
         self.contractor_label.setText(_translate("SpecForm", "Контрагент"))
         self.project_label.setText(_translate("SpecForm", "Проект"))

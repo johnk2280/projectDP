@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_FirmForm(object):
+class FirmForm(object):
     def setupUi(self, FirmForm):
         FirmForm.setObjectName("FirmForm")
         FirmForm.resize(603, 198)
@@ -120,7 +120,7 @@ class Ui_FirmForm(object):
 
     def retranslateUi(self, FirmForm):
         _translate = QtCore.QCoreApplication.translate
-        FirmForm.setWindowTitle(_translate("FirmForm", "Form"))
+        FirmForm.setWindowTitle(_translate("FirmForm", "Добавление компании"))
         self.full_name_label.setText(_translate("FirmForm", "Полное наименование"))
         self.short_name_label.setText(_translate("FirmForm", "Короткое наименование"))
         self.inn_label.setText(_translate("FirmForm", "ИНН"))

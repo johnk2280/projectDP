@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_WorkPackForm(object):
+class WorkPackForm(object):
     def setupUi(self, WorkPackForm):
         WorkPackForm.setObjectName("WorkPackForm")
         WorkPackForm.resize(603, 198)
@@ -76,7 +76,7 @@ class Ui_WorkPackForm(object):
 
     def retranslateUi(self, WorkPackForm):
         _translate = QtCore.QCoreApplication.translate
-        WorkPackForm.setWindowTitle(_translate("WorkPackForm", "Form"))
+        WorkPackForm.setWindowTitle(_translate("WorkPackForm", "Добавление пакета работ"))
         self.work_pack_label.setText(_translate("WorkPackForm", "Наименование пакета"))
         self.save_button.setText(_translate("WorkPackForm", "Записать и закрыть"))
         self.cancel_button.setText(_translate("WorkPackForm", "Отмена"))

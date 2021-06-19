@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_ProjectForm(object):
+class ProjectForm(object):
     def setupUi(self, ProjectForm):
         ProjectForm.setObjectName("ProjectForm")
         ProjectForm.resize(603, 198)
@@ -92,7 +92,7 @@ class Ui_ProjectForm(object):
 
     def retranslateUi(self, ProjectForm):
         _translate = QtCore.QCoreApplication.translate
-        ProjectForm.setWindowTitle(_translate("ProjectForm", "Form"))
+        ProjectForm.setWindowTitle(_translate("ProjectForm", "Добавление проекта"))
         self.organization_label.setText(_translate("ProjectForm", "Застройщик"))
         self.project_label.setText(_translate("ProjectForm", "Наименование проекта"))
         self.save_button.setText(_translate("ProjectForm", "Записать и закрыть"))

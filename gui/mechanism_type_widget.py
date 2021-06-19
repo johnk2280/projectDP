@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MechTypeForm(object):
+class MechTypeForm(object):
     def setupUi(self, MechTypeForm):
         MechTypeForm.setObjectName("MechTypeForm")
         MechTypeForm.resize(603, 198)
@@ -76,7 +76,7 @@ class Ui_MechTypeForm(object):
 
     def retranslateUi(self, MechTypeForm):
         _translate = QtCore.QCoreApplication.translate
-        MechTypeForm.setWindowTitle(_translate("MechTypeForm", "Form"))
+        MechTypeForm.setWindowTitle(_translate("MechTypeForm", "Добавление типа механизма"))
         self.mechanism_type_label.setText(_translate("MechTypeForm", "Тип механизма"))
         self.save_button.setText(_translate("MechTypeForm", "Записать и закрыть"))
         self.cancel_button.setText(_translate("MechTypeForm", "Отмена"))

@@ -1,6 +1,16 @@
 from PyQt5 import QtWidgets, QtCore
+
 from gui.add_orders_widget import Ui_AddOrdersForm
-from .widget_controller import WidgetForm
+from gui.contract_widget import ContractForm
+
+from controllers.widget_controller import WidgetForm
+from controllers.add_contract_controller import AddContractForm
+from controllers.add_firm_controller import AddFirmForm
+from controllers.add_mech_type_controller import AddMechTypeForm
+from controllers.add_project_controller import AddProjectForm
+from controllers.add_service_controller import AddServiceForm
+from controllers.add_work_pack_controller import AddWorkPackForm
+from controllers.add_spec_controller import AddSpecForm
 
 
 class AddOrdersForm(WidgetForm, Ui_AddOrdersForm):
@@ -9,6 +19,15 @@ class AddOrdersForm(WidgetForm, Ui_AddOrdersForm):
     def __init__(self):
         super(AddOrdersForm, self).__init__()
         self.setupUi(self)
+
+        self.add_contract_form = AddContractForm()
+        self.add_firm_form = AddFirmForm()
+
+        self.add_mech_type_form = AddMechTypeForm()
+        self.add_project_form = AddProjectForm()
+        self.add_service_form = AddServiceForm()
+        self.add_spec_form = AddSpecForm()
+        self.add_work_pack_form = AddWorkPackForm()
 
         # self.db = db
         """ Список содержащий выбор пользователя во всех QComboBox. """
@@ -22,12 +41,13 @@ class AddOrdersForm(WidgetForm, Ui_AddOrdersForm):
         self.save_button.clicked.connect(self.save)
         self.cancel_button.clicked.connect(self.hide)
         self.clear_button.clicked.connect(self._clear_table)
-        # self.add_orders_form.add_project_btn.clicked.connect()
-        # self.add_orders_form.add_workpack_btn.clicked.connect()
-        # self.add_orders_form.add_service_btn.clicked.connect()
-        # self.add_orders_form.add_contract_btn.clicked.connect()
-        # self.add_orders_form.add_type_btn.clicked.connect()
-        # self.add_orders_form.add_builder_btn.clicked.connect()
+        self.add_contract_btn.clicked.connect(self.show_contract_form)
+        self.add_org_btn.clicked.connect(self.show_firm_form)
+        self.add_project_btn.clicked.connect(self.show_project_form)
+        self.add_workpack_btn.clicked.connect(self.show_work_pack_form)
+        self.add_service_btn.clicked.connect(self.show_service_form)
+        self.add_type_btn.clicked.connect(self.show_mech_type_form)
+        self.add_builder_btn.clicked.connect(self.show_firm_form)
 
         """ Инициализация всех QComboBox в виджете добавления заявок. """
 
@@ -127,6 +147,30 @@ class AddOrdersForm(WidgetForm, Ui_AddOrdersForm):
         for i in range(self.orders_table_widget.rowCount() - 1, -1, -1):
             self.orders_table_widget.removeRow(i)
 
+    @QtCore.pyqtSlot()
+    def show_contract_form(self):
+        self.add_contract_form.show()
+
+    @QtCore.pyqtSlot()
+    def show_firm_form(self):
+        self.add_firm_form.show()
+
+    @QtCore.pyqtSlot()
+    def show_mech_type_form(self):
+        self.add_mech_type_form.show()
+
+    @QtCore.pyqtSlot()
+    def show_project_form(self):
+        self.add_project_form.show()
+
+    @QtCore.pyqtSlot()
+    def show_service_form(self):
+        self.add_service_form.show()
+
+    @QtCore.pyqtSlot()
+    def show_work_pack_form(self):
+        self.add_work_pack_form.show()
+
     def save(self):
         """ Добавления списка заявок в БД и скрытие виджета. """
         data = {}
@@ -135,7 +179,7 @@ class AddOrdersForm(WidgetForm, Ui_AddOrdersForm):
         self.setParent(None)
         self.orders_items.clear()
 
-    def hide(self):
+    def hide_widget(self):
         """ Скрытие виджета добавления заявок. """
         self._clear_table()
         self.setParent(None)
